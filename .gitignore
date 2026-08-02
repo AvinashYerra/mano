@@ -1,0 +1,37 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Logs
+logs/
+*.log
+
+# macOS
+.DS_Store
+
+# Python build
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+
+# Spark
+spark-warehouse/
+
+# Temporary media
+tmp/
+downloads/
+generated/
+
+# MinIO data (if stored locally)
+minio-data/
