@@ -1,40 +1,21 @@
 from kafka import KafkaProducer
 import json
-import time
+
+from shared.config import settings
 
 
-producer = KafkaProducer(
-    bootstrap_servers="localhost:9092",
-    value_serializer=lambda v: json.dumps(v).encode("utf-8")
-)
+class Producer:
 
+    def __init__(self):
 
-messages = [
-    {
-        "session_id": "test-001",
-        "audio_chunk": "hello world",
-        "timestamp": "2026-08-02T20:00:00"
-    },
-    {
-        "session_id": "test-002",
-        "audio_chunk": "testing kafka pipeline",
-        "timestamp": "2026-08-02T20:01:00"
-    }
-]
+        self.producer = KafkaProducer(
+            bootstrap_servers=settings.KAFKA_BOOTSTRAP_SERVERS,
+            value_serializer=lambda v: json.dumps(v).encode("utf-8")
+        )
 
+    def publish(self, topic: str, message: dict):
 
-for message in messages:
+        self.producer.send(topic, message)
+        self.producer.flush()
 
-    producer.send(
-        "audio.raw.v1",
-        message
-    )
-
-    print("Sent:", message)
-
-    time.sleep(1)
-
-
-producer.flush()
-
-print("Producer completed")
+        print(f"[Producer] {topic}")

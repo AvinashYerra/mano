@@ -1,0 +1,4 @@
+This is a sample accessibility streaming pipeline.
+It demonstrates how audio is split into chunks.
+Each chunk will later be transcribed independently.
+Kafka will stream these chunks to downstream services.
